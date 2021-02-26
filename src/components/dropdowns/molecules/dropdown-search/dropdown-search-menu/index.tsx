@@ -1,8 +1,8 @@
 import React, { useRef, forwardRef, createRef } from "react";
 import cn from "classnames";
-import DropdownOption from "../../common/dropdown-option";
-import useMenuCloseListener from "../../common/use-menu-close-listener";
-import useMenuPosition from "../../common/use-menu-position";
+import DropdownOption from "../../../atoms/dropdown-option";
+import useMenuListener from "../../../hooks/use-menu-listener";
+import useMenuPosition from "../../../hooks/use-menu-position";
 import s from "./dropdown-search-menu.module.scss";
 
 interface IDropdownMenuProps {
@@ -38,7 +38,7 @@ const DropdownSearchMenu = forwardRef<HTMLDivElement, IDropdownMenuProps>(
       triggerRef,
     });
 
-    useMenuCloseListener({
+    useMenuListener({
       menuRef: ref,
       toggleOpen,
       triggerRef,

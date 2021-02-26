@@ -1,4 +1,3 @@
-import React from 'react';
 import s from './dropdown-checkbox.module.scss';
 
 interface IDropdownCheckboxProps {
@@ -6,9 +5,9 @@ interface IDropdownCheckboxProps {
 }
 
 const DropdownCheckbox = ({ isActive }: IDropdownCheckboxProps) => (
-  <div className={s.wrap}>
+  <span className={s.wrap}>
     {isActive ? '-' : '+'}
-  </div>
+  </span>
 );
 
 export default DropdownCheckbox;

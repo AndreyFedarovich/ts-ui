@@ -1,6 +1,5 @@
-import React, { forwardRef } from 'react';
+import { forwardRef, FormEvent } from 'react';
 import cn from 'classnames';
-import { InputEvent } from "../../../constants/types.constants";
 
 import s from './input.module.scss';
 
@@ -10,7 +9,7 @@ interface IInputProps {
   error?: string;
   className?: string;
   placeholder?: string;
-  onChange: (e: InputEvent) => void
+  onChange?: (e: FormEvent<HTMLInputElement>) => void
 }
 
 const Input = forwardRef<HTMLInputElement, IInputProps>(({

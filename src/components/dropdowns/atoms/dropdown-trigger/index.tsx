@@ -1,6 +1,6 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, FormEvent } from "react";
 import cn from "classnames";
-import onBlurMenu from "../../common/on-blur-menu";
+import onBlurMenu from "../../helpers/blur-menu.helper";
 import s from "./dropdown-trigger.module.scss";
 
 interface IDropdownTriggerProps {
@@ -9,10 +9,11 @@ interface IDropdownTriggerProps {
   toggleOpen: (a: boolean) => void;
   menuRef: React.RefObject<HTMLDivElement>;
   error?: string;
-  selected: string[];
   placeholder?: string;
   label?: string;
-  isMultiple?: boolean;
+  value?: string
+  onSearch?: (e: FormEvent<HTMLInputElement>) => void;
+  readOnly?: boolean
 }
 
 const DropdownTrigger = forwardRef<HTMLDivElement, IDropdownTriggerProps>(
@@ -25,18 +26,15 @@ const DropdownTrigger = forwardRef<HTMLDivElement, IDropdownTriggerProps>(
       placeholder,
       error,
       menuRef,
-      selected,
-      isMultiple,
+      value,
+      onSearch,
+      readOnly
     },
     ref
   ) => {
-    const getValue = (): string => {
-      if (!isMultiple && selected.length) return selected[0];
-      return "";
-    };
 
     return (
-      <div className={cn(s.wrap)}>
+      <div className={cn(s.wrap, { [s.error]: error })}>
         {label && (
           <label htmlFor={name} className={s.label}>
             {label}
@@ -45,12 +43,13 @@ const DropdownTrigger = forwardRef<HTMLDivElement, IDropdownTriggerProps>(
         <div ref={ref} className={cn(s.trigger, { [s.open]: isOpen })}>
           <input
             id={name}
+            readOnly={readOnly}
             placeholder={placeholder}
             className={s.input}
             onFocus={() => toggleOpen(true)}
             onBlur={() => onBlurMenu({ menuRef, toggleOpen })}
-            readOnly
-            value={getValue()}
+            value={value}
+            onChange={onSearch}
           />
         </div>
         {error && <span className={s.errorMessage}>{error}</span>}

@@ -20,6 +20,8 @@ const getMenuPosition = ({
   const { top } = trigger.getBoundingClientRect();
   const { height: menuHeight } = menu.getBoundingClientRect();
   let scrollHeight = document.documentElement.clientHeight;
+  console.log('scrollHeight: ', scrollHeight);
+  
   if (scrollRef) {
     const { current: scroll } = scrollRef;
     if (!scroll) return "";

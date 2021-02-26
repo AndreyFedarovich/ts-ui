@@ -1,6 +1,6 @@
 import React, { forwardRef, MutableRefObject } from "react";
 import cn from "classnames";
-import onBlurMenu from "../on-blur-menu";
+import onBlurMenu from "../../helpers/blur-menu.helper";
 import DropdownCheckbox from "../dropdown-checkbox";
 import s from "./dropdown-option.module.scss";
 

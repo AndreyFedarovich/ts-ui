@@ -1,10 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, FormEvent } from "react";
 import cn from "classnames";
-import DropdownSearchTrigger from "./dropdown-search-trigger";
+import DropdownTrigger from "../../atoms/dropdown-trigger";
 import DropdownSearchMenu from "./dropdown-search-menu";
-import DropdownSelected from "../common/dropdown-selected";
-import { searchOptions } from "./functions.helper";
-import { InputEvent } from "../../../constants/types.constants";
+import DropdownSelected from "../../atoms/dropdown-selected";
+import { searchOptions } from "../../helpers/search-options.helper";
 import s from "./dropdown-search.module.scss";
 
 interface IDropdownSearchProps {
@@ -17,7 +16,7 @@ interface IDropdownSearchProps {
   label?: string;
   isMultiple?: boolean;
   scrollRef?: React.RefObject<HTMLDivElement>;
-  onSearch: (e: InputEvent) => void;
+  onSearch: (e: FormEvent<HTMLInputElement>) => void;
   searchValue?: string;
 }
 
@@ -38,17 +37,18 @@ const DropdownSearch = ({
   const menuRef = useRef(null);
   const [isOpen, toggleOpen] = useState(false);
 
+
   return (
     <div className={cn(s.wrap, className)}>
-      <DropdownSearchTrigger
-        ref={triggerRef}
-        label={label}
+      <DropdownTrigger
         name={name}
-        onSearch={onSearch}
+        label={label}
+        ref={triggerRef}
+        menuRef={menuRef}
         placeholder={placeholder}
         toggleOpen={toggleOpen}
         isOpen={isOpen}
-        menuRef={menuRef}
+        onSearch={onSearch} // ?
       />
       <DropdownSearchMenu
         ref={menuRef}

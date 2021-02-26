@@ -1,11 +1,9 @@
 import React, { useRef, forwardRef, createRef } from "react";
 import cn from "classnames";
-import useMenuCloseListener from "../../common/use-menu-close-listener";
-import useMenuPosition from "../../common/use-menu-position";
-import onBlurMenu from "../../common/on-blur-menu";
-import DropdownCheckbox from "../../common/dropdown-checkbox";
+import useMenuCloseListener from "../../../hooks/use-menu-listener";
+import useMenuPosition from "../../../hooks/use-menu-position";
 import s from "./dropdown-menu.module.scss";
-import DropdownOption from "../../common/dropdown-option";
+import DropdownOption from "../../../atoms/dropdown-option";
 
 interface IDropdownMenuProps {
   onSelect: (a: string) => void;

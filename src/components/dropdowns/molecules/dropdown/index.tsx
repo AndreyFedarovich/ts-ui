@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import cn from "classnames";
-import DropdownTrigger from "./dropdown-trigger";
+import DropdownTrigger from "../../atoms/dropdown-trigger";
 import DropdownMenu from "./dropdown-menu";
-import DropdownSelected from "../common/dropdown-selected";
+import DropdownSelected from "../../atoms/dropdown-selected";
 import s from "./dropdown.module.scss";
 
 interface IDropdownProps {
@@ -31,18 +31,24 @@ const Dropdown: React.FC<IDropdownProps> = ({
   const triggerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, toggleOpen] = useState(false);
+
+  const getValue = (): string => {
+    if (!isMultiple && selected.length) return selected[0];
+    return "";
+  };
+
   return (
     <div className={cn(s.wrap, className)}>
       <DropdownTrigger
         name={name}
+        readOnly
         label={label}
+        ref={triggerRef}
+        menuRef={menuRef}
         placeholder={placeholder}
         toggleOpen={toggleOpen}
         isOpen={isOpen}
-        ref={triggerRef}
-        selected={selected}
-        menuRef={menuRef}
-        isMultiple={isMultiple}
+        value={getValue()} // ?
       />
       <DropdownMenu
         isOpen={isOpen}

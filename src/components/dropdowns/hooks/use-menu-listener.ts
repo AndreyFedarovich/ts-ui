@@ -9,7 +9,7 @@ interface IMenuCloseListenerProps {
   triggerRef: RefObject<HTMLDivElement>;
 }
 
-export default function useMenuCloseListener({
+export default function useMenuListener({
   menuRef,
   triggerRef,
   toggleOpen,
@@ -23,6 +23,9 @@ export default function useMenuCloseListener({
     },
     [menuRef, triggerRef, toggleOpen]
   );
+
+  console.log('here');
+  
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClick);

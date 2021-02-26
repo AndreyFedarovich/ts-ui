@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import Input from "./components/inputs/input";
-import Dropdown from "./components/dropdowns/dropdown";
-import DropdownSearch from "./components/dropdowns/dropdown-search";
-import { InputEvent } from "./constants/types.constants";
+import Dropdown from "./components/dropdowns/molecules/dropdown";
+import DropdownSearch from "./components/dropdowns/molecules/dropdown-search";
 import s from "./app.module.scss";
 
-const options = ["test1", "test2", "test3"];
+const defaultOptions = ["test1", "test2", "test3", "test4", "test5", "test5", "test6", "test7"];
 
 function App() {
   const [selected, setSelected] = useState([] as string[]);
-
-  // const onSelect = (option: string): void => {
-  //   setSelected([option]);
-  // };
+  const [searchValue, setSearchValue] = useState('');
 
   const onSelectMultiple = (option: string): void => {
     if (!selected.includes(option)) {
@@ -22,8 +18,9 @@ function App() {
     }
   };
 
-  const onSearch = (e: InputEvent) => {
-    console.log("koko", e);
+  const onSearch = (e: FormEvent<HTMLInputElement>) => {
+    const { value } = e.target as HTMLInputElement;
+    setSearchValue(value);
   };
 
   return (
@@ -33,7 +30,6 @@ function App() {
           label="Input"
           placeholder="Input test placeholder"
           name="inputTest"
-          onChange={(e: InputEvent) => console.log("koko", e)}
         />
       </div>
       <div className={s.field}>
@@ -41,7 +37,7 @@ function App() {
           label="Dropdown"
           placeholder="Dropdown test placeholder"
           name="dropdownTest"
-          options={options}
+          options={defaultOptions}
           selected={selected}
           isMultiple
           onSelect={(option) => onSelectMultiple(option)}
@@ -52,11 +48,12 @@ function App() {
           label="Dropdown search"
           placeholder="Dropdown test placeholder"
           name="dropdownSearchTest"
-          options={options}
+          options={defaultOptions}
           selected={selected}
           isMultiple
-          onSelect={(option) => onSelectMultiple(option)}
+          searchValue={searchValue}
           onSearch={onSearch}
+          onSelect={(option) => onSelectMultiple(option)}
         />
       </div>
     </div>

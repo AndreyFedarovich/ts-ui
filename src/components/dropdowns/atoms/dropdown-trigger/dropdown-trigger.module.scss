@@ -16,7 +16,6 @@
   width: 100%;
   position: relative;
   display: flex;
-
   &:before {
     transition: border-color $speed;
     width: 0px;
@@ -60,7 +59,11 @@
   outline: none;
   transition: border $speed;
   padding-right: 35px;
+  -webkit-appearance: none;
+
   @include text();
+  cursor: pointer;
+
   &:hover {
     border: 1px solid rgba($accent, 0.4);
   }
