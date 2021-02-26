@@ -1,11 +1,12 @@
 import React, { useState, useRef, FormEvent } from "react";
 import cn from "classnames";
-import DropdownTrigger from "../../atoms/dropdown-trigger";
 import DropdownSearchMenu from "./dropdown-search-menu";
 import DropdownSelected from "../../atoms/dropdown-selected";
 import { searchOptions } from "../../helpers/search-options.helper";
+import onBlurMenu from "../../helpers/blur-menu.helper";
+import Input from "../../../inputs/input";
+import Caret from "../../../icons/caret";
 import s from "./dropdown-search.module.scss";
-
 interface IDropdownSearchProps {
   name: string;
   options: string[];
@@ -20,7 +21,7 @@ interface IDropdownSearchProps {
   searchValue?: string;
 }
 
-const DropdownSearch = ({
+export const DropdownSearch = ({
   options,
   isMultiple,
   onSearch,
@@ -33,22 +34,21 @@ const DropdownSearch = ({
   className,
   selected,
 }: IDropdownSearchProps) => {
-  const triggerRef = useRef(null);
-  const menuRef = useRef(null);
+  const triggerRef = useRef<HTMLInputElement>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, toggleOpen] = useState(false);
-
 
   return (
     <div className={cn(s.wrap, className)}>
-      <DropdownTrigger
+      <Input
         name={name}
         label={label}
         ref={triggerRef}
-        menuRef={menuRef}
         placeholder={placeholder}
-        toggleOpen={toggleOpen}
-        isOpen={isOpen}
-        onSearch={onSearch} // ?
+        onChange={onSearch}
+        onFocus={() => toggleOpen(true)}
+        onBlur={() => onBlurMenu({ menuRef, toggleOpen })}
+        icon={<Caret className={isOpen ? s.caretDown : s.caretUp} />}
       />
       <DropdownSearchMenu
         ref={menuRef}

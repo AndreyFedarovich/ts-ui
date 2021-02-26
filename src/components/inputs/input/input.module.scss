@@ -1,17 +1,21 @@
 @import "../../../assets/styles/entry.scss";
 
-.wrap {
+.root {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   width: 100%;
   position: relative;
 }
 
-.label {
-  @include inputLabel();
+.wrap {
+  width: 100%;
+  display: flex;
+  position: relative;
 }
 
 .input {
+  width: 100%;
   border: 1px solid $lightgray;
   border-radius: $radius-m;
   height: $ui-height-m;
@@ -19,6 +23,9 @@
   font-size: 16px;
   outline: none;
   transition: border $speed;
+  position: relative;
+  background-color: transparent;
+  -webkit-appearance: none;
   @include text();
   &:hover {
     border: 1px solid rgba($accent, 0.4);

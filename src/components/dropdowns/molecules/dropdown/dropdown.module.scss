@@ -1,4 +1,30 @@
-.wrap {
+@import "../../../../assets/styles/entry.scss";
+
+.root {
   position: relative;
   width: 100%;
+}
+
+@mixin caret {
+  position: absolute;
+  right: 20px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.caretDown {
+  @include caret();
+  &:before {
+    transform: translateY(-3px);
+    border-bottom-color: $lightgray;
+  }
+}
+
+.caretUp {
+  @include caret();
+  &:before {
+    border-top-color: $lightgray;
+    transform: translateY(3px);
+  }
 }

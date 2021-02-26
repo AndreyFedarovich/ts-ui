@@ -34,7 +34,6 @@ const DropdownOption = forwardRef<HTMLButtonElement, IDropdowOptionProps>(
   ) => {
     return (
       <button
-        key={option}
         ref={ref}
         type="button"
         className={cn(s.option, {

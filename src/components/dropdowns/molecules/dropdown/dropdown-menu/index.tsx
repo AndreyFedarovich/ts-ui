@@ -2,8 +2,8 @@ import React, { useRef, forwardRef, createRef } from "react";
 import cn from "classnames";
 import useMenuCloseListener from "../../../hooks/use-menu-listener";
 import useMenuPosition from "../../../hooks/use-menu-position";
-import s from "./dropdown-menu.module.scss";
 import DropdownOption from "../../../atoms/dropdown-option";
+import s from "./dropdown-menu.module.scss";
 
 interface IDropdownMenuProps {
   onSelect: (a: string) => void;
@@ -48,7 +48,7 @@ const DropdownMenu = forwardRef<HTMLDivElement, IDropdownMenuProps>(
       options.map(() => createRef<HTMLButtonElement>())
     );
     return (
-      <div className={s.reverse}>
+      <div className={s.root}>
         <div className={cn(s.wrap, s[menuPosition])}>
           {isOpen && (
             <div ref={ref} className={s.options}>
@@ -57,6 +57,7 @@ const DropdownMenu = forwardRef<HTMLDivElement, IDropdownMenuProps>(
               ) : (
                 options.map((option, i) => (
                   <DropdownOption
+                    key={option + i}
                     ref={optionsRef.current[i]}
                     option={option}
                     options={options}

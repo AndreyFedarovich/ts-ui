@@ -1,0 +1,9 @@
+@import "../../../assets/styles/entry.scss";
+
+.root {
+  @include h4();
+  color: $accent;
+  margin-bottom: 4px;
+  display: block;
+  cursor: pointer;
+}

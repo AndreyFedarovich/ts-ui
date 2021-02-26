@@ -1,8 +1,10 @@
 import React, { useState, useRef } from "react";
 import cn from "classnames";
-import DropdownTrigger from "../../atoms/dropdown-trigger";
+import Input from "../../../inputs/input";
 import DropdownMenu from "./dropdown-menu";
 import DropdownSelected from "../../atoms/dropdown-selected";
+import onBlurMenu from "../../helpers/blur-menu.helper";
+import Caret from "../../../icons/caret";
 import s from "./dropdown.module.scss";
 
 interface IDropdownProps {
@@ -17,7 +19,7 @@ interface IDropdownProps {
   scrollRef?: React.RefObject<HTMLDivElement>;
 }
 
-const Dropdown: React.FC<IDropdownProps> = ({
+export const Dropdown: React.FC<IDropdownProps> = ({
   options,
   isMultiple,
   onSelect,
@@ -28,7 +30,7 @@ const Dropdown: React.FC<IDropdownProps> = ({
   className,
   selected,
 }) => {
-  const triggerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLInputElement>(null);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, toggleOpen] = useState(false);
 
@@ -38,17 +40,17 @@ const Dropdown: React.FC<IDropdownProps> = ({
   };
 
   return (
-    <div className={cn(s.wrap, className)}>
-      <DropdownTrigger
+    <div className={cn(s.root, className)}>
+      <Input
         name={name}
         readOnly
         label={label}
         ref={triggerRef}
-        menuRef={menuRef}
         placeholder={placeholder}
-        toggleOpen={toggleOpen}
-        isOpen={isOpen}
-        value={getValue()} // ?
+        value={getValue()}
+        onFocus={() => toggleOpen(true)}
+        onBlur={() => onBlurMenu({ menuRef, toggleOpen })}
+        icon={<Caret className={isOpen ? s.caretDown : s.caretUp} />}
       />
       <DropdownMenu
         isOpen={isOpen}

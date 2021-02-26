@@ -1,14 +1,10 @@
 @import "../../../assets/styles/entry.scss";
 
-.wrap {
+.root {
   width: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
-}
-
-.label {
-  @include inputLabel();
 }
 
 .textarea {

@@ -49,7 +49,7 @@ const DropdownSearchMenu = forwardRef<HTMLDivElement, IDropdownMenuProps>(
     );
 
     return (
-      <div className={s.reverse}>
+      <div className={s.root}>
         <div className={cn(s.wrap, s[menuPosition])}>
           {isOpen && (
             <div ref={ref} className={s.options}>
@@ -58,6 +58,7 @@ const DropdownSearchMenu = forwardRef<HTMLDivElement, IDropdownMenuProps>(
               ) : (
                 options.map((option, i) => (
                   <DropdownOption
+                    key={option + i}
                     ref={optionsRef.current[i]}
                     option={option}
                     options={options}
