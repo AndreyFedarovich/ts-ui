@@ -119,13 +119,6 @@
   }
 }
 
-@mixin inputLabel() {
-  @include h4();
-  color: $accent;
-  margin-bottom: 4px;
-  display: block;
-}
-
 @mixin inputErrorMessage() {
   position: absolute;
   right: 0;

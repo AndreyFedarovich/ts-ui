@@ -1,0 +1,83 @@
+import React, { useRef, forwardRef, createRef } from "react";
+import cn from "classnames";
+import DropdownOption from "../../../atoms/dropdown-option";
+import useMenuListener from "../../../hooks/use-menu-listener";
+import useMenuPosition from "../../../hooks/use-menu-position";
+import s from "./dropdown-search-menu.module.scss";
+
+interface IDropdownMenuProps {
+  onSelect: (a: string) => void;
+  options: Array<string>;
+  toggleOpen: (a: boolean) => void;
+  triggerRef: React.RefObject<HTMLDivElement>;
+  isOpen: boolean;
+  isMultiple?: boolean;
+  scrollRef?: React.RefObject<HTMLDivElement>;
+  children: React.ReactNode;
+  selected: string[];
+}
+
+const DropdownSearchMenu = forwardRef<HTMLDivElement, IDropdownMenuProps>(
+  (
+    {
+      isMultiple,
+      onSelect,
+      options,
+      toggleOpen,
+      triggerRef,
+      scrollRef,
+      children,
+      selected,
+      isOpen,
+    },
+    ref
+  ) => {
+    const { menuPosition } = useMenuPosition({
+      menuRef: ref,
+      scrollRef,
+      triggerRef,
+    });
+
+    useMenuListener({
+      menuRef: ref,
+      toggleOpen,
+      triggerRef,
+    });
+
+    const optionsRef = useRef(
+      options.map(() => createRef<HTMLButtonElement>())
+    );
+
+    return (
+      <div className={s.root}>
+        <div className={cn(s.wrap, s[menuPosition])}>
+          {isOpen && (
+            <div ref={ref} className={s.options}>
+              {!options.length ? (
+                <span className={s.empty}>No results</span>
+              ) : (
+                options.map((option, i) => (
+                  <DropdownOption
+                    key={option + i}
+                    ref={optionsRef.current[i]}
+                    option={option}
+                    options={options}
+                    onSelect={onSelect}
+                    toggleOpen={toggleOpen}
+                    isActive={selected.includes(option)}
+                    isMultiple={isMultiple}
+                    index={i}
+                    menuRef={ref}
+                  />
+                ))
+              )}
+            </div>
+          )}
+        </div>
+        {children}
+      </div>
+    );
+  }
+);
+
+export default DropdownSearchMenu;
