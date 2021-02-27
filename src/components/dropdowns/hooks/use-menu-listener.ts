@@ -18,17 +18,11 @@ export default function useMenuListener({
     (e) => {
       const { current: trigger } = triggerRef;
       const { current: menu } = menuRef as RefObject<HTMLDivElement>;
-      console.log('menu: ', menu);
-      console.log('trigger: ', trigger);
-      console.log('e.target: ', e.target);
-      
       if (menu?.contains(e.target) || trigger?.contains(e.target)) return;
       toggleOpen(false);
     },
     [menuRef, triggerRef, toggleOpen]
   );
-
-  console.log("menuRef: ", menuRef);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClick);

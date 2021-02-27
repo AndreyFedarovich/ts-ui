@@ -1,11 +1,11 @@
 import React, { useState, useRef } from "react";
 import cn from "classnames";
 import Input from "../../../inputs/input";
-import DropdownMenu from "./dropdown-menu";
+import DropdownMenu from "../../atoms/dropdown-menu";
 import DropdownSelected from "../../atoms/dropdown-selected";
 import onBlurMenu from "../../helpers/blur-menu.helper";
 import Caret from "../../../icons/caret";
-import s from "./dropdown.module.scss";
+import s from "../../styles/dropdown.module.scss";
 
 interface IDropdownProps {
   name: string;

@@ -1,9 +1,10 @@
-@import "../../../../../assets/styles/entry.scss";
+@import "../../../../assets/styles/entry.scss";
 
 .root {
   display: flex;
   flex-direction: column-reverse;
 }
+
 .wrap {
   z-index: 1;
   position: relative;

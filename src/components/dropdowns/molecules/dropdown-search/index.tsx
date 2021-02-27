@@ -1,12 +1,12 @@
 import React, { useState, useRef, FormEvent } from "react";
 import cn from "classnames";
-import DropdownSearchMenu from "./dropdown-search-menu";
 import DropdownSelected from "../../atoms/dropdown-selected";
 import { searchOptions } from "../../helpers/search-options.helper";
 import onBlurMenu from "../../helpers/blur-menu.helper";
 import Input from "../../../inputs/input";
 import Caret from "../../../icons/caret";
-import s from "./dropdown-search.module.scss";
+import DropdownMenu from "../../atoms/dropdown-menu";
+import s from "../../styles/dropdown.module.scss";
 interface IDropdownSearchProps {
   name: string;
   options: string[];
@@ -46,11 +46,12 @@ export const DropdownSearch = ({
         ref={triggerRef}
         placeholder={placeholder}
         onChange={onSearch}
+        value={isMultiple ? undefined : selected[0]}
         onFocus={() => toggleOpen(true)}
         onBlur={() => onBlurMenu({ menuRef, toggleOpen })}
         icon={<Caret className={isOpen ? s.caretDown : s.caretUp} />}
       />
-      <DropdownSearchMenu
+      <DropdownMenu
         ref={menuRef}
         selected={selected}
         triggerRef={triggerRef}
@@ -64,7 +65,7 @@ export const DropdownSearch = ({
         {isMultiple && (
           <DropdownSelected unselect={onSelect} selected={selected} />
         )}
-      </DropdownSearchMenu>
+      </DropdownMenu>
     </div>
   );
 };

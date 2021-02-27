@@ -1,9 +1,9 @@
 import React, { useRef, forwardRef, createRef } from "react";
 import cn from "classnames";
-import DropdownOption from "../../../atoms/dropdown-option";
-import useMenuListener from "../../../hooks/use-menu-listener";
-import useMenuPosition from "../../../hooks/use-menu-position";
-import s from "./dropdown-search-menu.module.scss";
+import useMenuCloseListener from "../../hooks/use-menu-listener";
+import useMenuPosition from "../../hooks/use-menu-position";
+import DropdownOption from "../dropdown-option";
+import s from "./dropdown-menu.module.scss";
 
 interface IDropdownMenuProps {
   onSelect: (a: string) => void;
@@ -17,9 +17,10 @@ interface IDropdownMenuProps {
   selected: string[];
 }
 
-const DropdownSearchMenu = forwardRef<HTMLDivElement, IDropdownMenuProps>(
+const DropdownMenu = forwardRef<HTMLDivElement, IDropdownMenuProps>(
   (
     {
+      isOpen,
       isMultiple,
       onSelect,
       options,
@@ -28,7 +29,6 @@ const DropdownSearchMenu = forwardRef<HTMLDivElement, IDropdownMenuProps>(
       scrollRef,
       children,
       selected,
-      isOpen,
     },
     ref
   ) => {
@@ -36,9 +36,10 @@ const DropdownSearchMenu = forwardRef<HTMLDivElement, IDropdownMenuProps>(
       menuRef: ref,
       scrollRef,
       triggerRef,
+      isOpen
     });
 
-    useMenuListener({
+    useMenuCloseListener({
       menuRef: ref,
       toggleOpen,
       triggerRef,
@@ -47,7 +48,6 @@ const DropdownSearchMenu = forwardRef<HTMLDivElement, IDropdownMenuProps>(
     const optionsRef = useRef(
       options.map(() => createRef<HTMLButtonElement>())
     );
-
     return (
       <div className={s.root}>
         <div className={cn(s.wrap, s[menuPosition])}>
@@ -80,4 +80,4 @@ const DropdownSearchMenu = forwardRef<HTMLDivElement, IDropdownMenuProps>(
   }
 );
 
-export default DropdownSearchMenu;
+export default DropdownMenu;
