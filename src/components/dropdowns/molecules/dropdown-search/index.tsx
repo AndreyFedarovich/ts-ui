@@ -48,7 +48,7 @@ export const DropdownSearch = ({
         onChange={onSearch}
         value={isMultiple ? undefined : selected[0]}
         onFocus={() => toggleOpen(true)}
-        onBlur={() => onBlurMenu({ menuRef, toggleOpen })}
+        onBlur={(e) => onBlurMenu({ e, menuRef, toggleOpen })}
         icon={<Caret className={isOpen ? s.caretDown : s.caretUp} />}
       />
       <DropdownMenu

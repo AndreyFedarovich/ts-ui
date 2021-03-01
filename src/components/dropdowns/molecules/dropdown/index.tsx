@@ -49,7 +49,7 @@ export const Dropdown: React.FC<IDropdownProps> = ({
         placeholder={placeholder}
         value={getValue()}
         onFocus={() => toggleOpen(true)}
-        onBlur={() => onBlurMenu({ menuRef, toggleOpen })}
+        onBlur={(e) => onBlurMenu({ e, menuRef, toggleOpen })}
         icon={<Caret className={isOpen ? s.caretDown : s.caretUp} />}
       />
       <DropdownMenu

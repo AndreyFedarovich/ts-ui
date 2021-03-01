@@ -43,9 +43,10 @@ const DropdownOption = forwardRef<HTMLButtonElement, IDropdowOptionProps>(
           onSelect(option);
           if (!isMultiple) toggleOpen(false);
         }}
-        onBlur={() =>
+        onBlur={(e) =>
           index === options.length - 1
             ? onBlurMenu({
+                e,
                 menuRef,
                 toggleOpen,
               })

@@ -1,6 +1,7 @@
-import { MutableRefObject, RefObject } from 'react';
+import { MutableRefObject, RefObject, FocusEvent } from "react";
 
 interface IBlurMenuProps {
+  e: FocusEvent;
   menuRef:
     | ((instance: HTMLDivElement | null) => void)
     | MutableRefObject<HTMLDivElement | null>
@@ -8,15 +9,9 @@ interface IBlurMenuProps {
   toggleOpen: (a: boolean) => void;
 }
 
-export default function onBlurMenu({
-  menuRef,
-  toggleOpen,
-}: IBlurMenuProps) {
-  // timeout fixing browser bug with document.activeElement
-  setTimeout(() => {
-    const active = document.activeElement;
-    const { current: menu } = menuRef as RefObject<HTMLDivElement>;
-    if (menu?.contains(active)) return;
-    toggleOpen(false);
-  }, 0);
+export default function onBlurMenu({ e, menuRef, toggleOpen }: IBlurMenuProps) {
+  const { current: menu } = menuRef as RefObject<HTMLDivElement>;
+  if (menu?.contains(e.relatedTarget as HTMLInputElement | HTMLButtonElement))
+    return;
+  toggleOpen(false);
 }
